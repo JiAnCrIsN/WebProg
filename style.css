@@ -1,0 +1,538 @@
+body {
+  user-select: none;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  background-image: url("bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+.retry-button,
+#isapaButton {
+  padding: 10px 20px;
+  width: 30%;
+  height: 40%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  position: absolute;
+  top: 20px;
+  background-image: url("Retry.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.retry-button:hover,
+#isapaButton:hover {
+  background-color: #0056b3;
+}
+#isapaButton {
+  display: none;
+  top: 100px;
+}
+#victoryMessage {
+  text-align: center;
+  display: none;
+  z-index: 9;
+  position: absolute;
+  padding: 50%, 50%, 50%, 50%;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  margin: 0%;
+  width: 100%;
+  height: 100%;
+}
+.row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.card {
+  width: 100px;
+  height: 150px;
+  margin: 30px 50px 10px 50px;
+  border-radius: 8px;
+  transition: transform 0.8s;
+  opacity: 1;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+.card-inner {
+  position: relative;
+  width: 100px;
+  height: 150px;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+.card.bumaliktad .card-inner {
+  transform: rotateY(-180deg);
+}
+.card-front,
+.card-back {
+  position: absolute;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+.card-back {
+  transform: rotateY(180deg);
+  z-index: 0;
+}
+.card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+.row:nth-child(2) {
+  justify-content: space-between;
+  width: 90%;
+}
+.victory-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: 50%;
+  bottom: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: none;
+}
+.play-again-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.play-again-button:hover {
+  background-color: #218838;
+}
+.retry-button {
+  background-image: url("Retry.jpg");
+  background-size: cover;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 7%;
+  height: 4%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-size: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  background-repeat: no-repeat;
+}
+.retry-button:hover {
+  background-color: #0056b3;
+}
+
+.slide {
+  top: 0;
+  z-index: 100;
+  height: 100%;
+  width: 180px;
+  position: absolute;
+  background-image: url(menu.jpg);
+  transition: 0.5s ease;
+  transform: translateX(-190px);
+}
+
+h1 {
+  z-index: 10;
+  top: 30px;
+  color: rgb(0, 0, 0);
+  font-weight: 800;
+  text-align: right;
+  padding: 10px 0;
+  padding-right: 30px;
+  pointer-events: none;
+}
+
+input {
+  z-index: 150;
+  display: none;
+  visibility: hidden;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.toggle {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  top: 50px;
+  left: 15px;
+  z-index: 150;
+  cursor: pointer;
+  border-radius: 2px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.toggle .common {
+  position: absolute;
+  height: 2px;
+  width: 20px;
+  background-color: black;
+  top: 5px;
+  left: 5px;
+  transition: 0.3s ease;
+}
+
+.toggle .top_line {
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.toggle .middle_line {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.toggle .bottom_line {
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+input:checked ~ .toggle .top_line {
+  left: 2px;
+  width: 15px;
+  top: 14px;
+  transform: rotate(45deg);
+}
+
+input:checked ~ .toggle .middle_line {
+  opacity: 0;
+  transform: translateX(0px);
+}
+
+input:checked ~ .toggle .bottom_line {
+  left: 2px;
+  width: 15px;
+  top: 14px;
+  transform: rotate(-45deg);
+}
+
+input:checked ~ .slide {
+  transform: translateX(0);
+}
+
+.cover {
+  top: 0;
+  z-index: 1;
+  width: 180px;
+  height: 500px;
+  background-image: url(menu.jpg);
+  transition: background-color 0.3s;
+  position: absolute;
+  left: 0;
+}
+
+.Jam {
+  bottom: 510px;
+  text-align: center;
+  z-index: 1;
+  width: 180px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s;
+  position: absolute;
+  left: 0;
+}
+
+.Jam:hover {
+  background-color: #e74c3c;
+}
+
+.image-Jam {
+  z-index: 0;
+  top: 50px;
+  width: 200px;
+  height: 300px;
+  background-image: url(Jam.jpg);
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  left: 0px;
+  transition: transform 0.5s;
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5ss;
+}
+
+.Jam:hover ~ .image-Jam {
+  transform: translateX(180px);
+  opacity: 1;
+}
+
+.Gloria {
+  text-align: center;
+  z-index: 1;
+  bottom: 430px;
+  width: 180px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s;
+  position: absolute;
+  left: 0;
+}
+
+.Gloria:hover {
+  background-color: #e74c3c;
+}
+
+.image-Gloria {
+  z-index: 0;
+  top: 50px;
+  width: 200px;
+  height: 300px;
+  background-image: url(Gloria.jpg);
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  left: 0px;
+  transition: transform 0.5s;
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5ss;
+}
+
+.Gloria:hover ~ .image-Gloria {
+  transform: translateX(180px);
+  opacity: 1;
+}
+
+.Llantero {
+  text-align: center;
+  bottom: 350px;
+  z-index: 1;
+  width: 180px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s;
+  position: absolute;
+  left: 0;
+}
+
+.Llantero:hover {
+  background-color: #e74c3c;
+}
+
+.image-Llantero {
+  z-index: 0;
+  top: 50px;
+  width: 200px;
+  height: 300px;
+  background-image: url(Lla.jpg);
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  left: 0px;
+  transition: transform 0.5s;
+  opacity: 0;
+  transition: transform 0.5s, opacity 1s;
+}
+
+.Llantero:hover ~ .image-Llantero {
+  transform: translateX(180px);
+  opacity: 1;
+}
+
+.Namang {
+  text-align: center;
+  z-index: 1;
+  bottom: 270px;
+  width: 180px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s;
+  position: absolute;
+  left: 0;
+}
+
+.Namang:hover {
+  background-color: #e74c3c;
+}
+
+.image-Namang {
+  z-index: 0;
+  top: 50px;
+  width: 200px;
+  height: 300px;
+  background-image: url(Jian.jpg);
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  left: 0px;
+  transition: transform 0.5s;
+  opacity: 0;
+  transition: transform 0.5s, opacity 1s;
+}
+
+.Namang:hover ~ .image-Namang {
+  transform: translateX(180px);
+  opacity: 1;
+}
+
+.Perlas {
+  text-align: center;
+  bottom: 190px;
+  z-index: 1;
+  width: 180px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s;
+  position: absolute;
+  left: 0;
+}
+
+.Perlas:hover {
+  background-color: #e74c3c;
+}
+
+.image-Perlas {
+  z-index: 0;
+  top: 50px;
+  width: 200px;
+  height: 300px;
+  background-image: url(Per.jpg);
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  left: 0px;
+  transition: transform 0.5s;
+  opacity: 0;
+  transition: transform 0.5s, opacity 1s;
+}
+
+.Perlas:hover ~ .image-Perlas {
+  transform: translateX(180px);
+  opacity: 1;
+}
+
+.Regudo {
+  text-align: center;
+  bottom: 110px;
+  z-index: 1;
+  width: 180px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s;
+  position: absolute;
+  left: 0;
+}
+
+.Regudo:hover {
+  background-color: #e74c3c;
+}
+
+.image-Regudo {
+  top: 50px;
+  z-index: 0;
+  width: 200px;
+  height: 300px;
+  background-image: url(Reg.jpg);
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  left: 0px;
+  transition: transform 0.5s;
+  opacity: 0;
+  transition: transform 0.5s, opacity 1s;
+}
+
+.Regudo:hover ~ .image-Regudo {
+  transform: translateX(180px);
+  opacity: 1;
+}
+
+.Ventura {
+  text-align: center;
+  bottom: 30px;
+  z-index: 1;
+  width: 180px;
+  height: 50px;
+  background-image: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s;
+  position: absolute;
+  left: 0;
+}
+
+.Ventura:hover {
+  background-color: #e74c3c;
+}
+
+.image-Ventura {
+  z-index: 0;
+  top: 50px;
+  width: 200px;
+  height: 300px;
+  background-image: url(Vent.jpg);
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  left: 0px;
+  transition: transform 0.5s;
+  opacity: 0;
+  transition: transform 0.5s, opacity 1s;
+}
+
+.Ventura:hover ~ .image-Ventura {
+  transform: translateX(180px);
+  opacity: 1;
+}
+
+.hm {
+  text-align: center;
+  bottom: 590px;
+  z-index: 1;
+  width: 180px;
+  height: 50px;
+  background-image: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s;
+  position: absolute;
+  left: 0;
+}
